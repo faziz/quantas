@@ -17,8 +17,9 @@ public class AirportsListingController {
     @GetMapping("/api/airports/search")
     public Airports getAirports(HttpServletRequest request) 
             throws IOException {
-
-        int uniqueKey = request.getQueryString().toLowerCase().hashCode();
+        
+        String queryString = request.getQueryString();
+        int uniqueKey = queryString == null ? -1 : queryString.toLowerCase().hashCode();
         Map<String, String[]> parameters = request.getParameterMap();
         return airportLocationService.getAirports(parameters, uniqueKey);
     }

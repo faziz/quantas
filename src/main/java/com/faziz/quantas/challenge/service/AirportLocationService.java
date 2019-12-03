@@ -19,12 +19,13 @@ import org.springframework.stereotype.Service;
 @Service
 @CacheConfig(cacheNames = "airports")
 public class AirportLocationService {
-    
+
     @Autowired
     private DocumentContext context;
 
     @Cacheable(key = "#uniqueKey")
     public Airports getAirports(final Map<String, String[]> parameters, Integer uniqueKey) {
+
         Filter[] filters = filters(parameters);
         List airports = filters.length == 0 ? 
             context.read("$.airports[*]", List.class):
@@ -42,6 +43,11 @@ public class AirportLocationService {
     private static Criteria newFilter(Entry<String, String[]> entry, 
             Map<String, String[]> parameters) {
 
+        //Prepares data filter based on attribute types. 
+        //
+        //Boolean data like international_airport and regional_airport and also numeric data like location has to be
+        //treated differently than the text based attributes.
+        //
         return asList("international_airport", "regional_airport").contains(entry.getKey()) ? 
             where(entry.getKey()).is(parseBoolean(parameters.get(entry.getKey())[0])): 
                 asList("location.latitude", "location.longitude").contains(entry.getKey()) ?

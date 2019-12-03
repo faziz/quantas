@@ -2,11 +2,20 @@ plugins {
     id 'org.springframework.boot' version '2.2.1.RELEASE'
     id 'io.spring.dependency-management' version '1.0.8.RELEASE'
     id 'java'
+    id 'application'
 }
 
 group = 'com.faziz.quantas'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
+
+ext {
+   javaMainClass = "com.faziz.quantas.challenge.AirportLocationApplication"
+}
+
+application {
+    mainClassName = javaMainClass
+}
 
 configurations {
     developmentOnly
