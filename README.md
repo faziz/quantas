@@ -16,7 +16,7 @@ The Json data fetched from the URI https://www.qantas.com.au/api/airports, and s
 
 The reason for getting the data stored in a local file is so that the application is runs in a disconnected mode from the Quantas API, which makes filtering data a local process and also makes it independent of the Quantas API.
 
-I am also cahing the results of the queries so that you don't need to go and parse the chunky Json data everytime.
+I am also caching the results of the queries in AirportLocationService so that you don't need to go and parse the chunky Json data everytime.
 
 In a production environment we would have a JSON based database like Mongodb that makes storage and querying of the Json data much more efficient.
 
@@ -28,29 +28,32 @@ In a production environment we would have a JSON based database like Mongodb tha
 * [Spring Boot Test] - For end-to-end testing.
 * [Java 8] - Basically for everything else.
 * [Gradle] - To build the application.
+* [Junit 5] - Unit tests
+* [Lombok] - For POJO utilities
 
 # Installation
 
-This project is based on Gradle.
+This project is based on Gradle, but you don't need to install Gradle, just having JDK 8 on the path is enough.
 
-To run application on Linux go to the projects directory.
+To run the application on Linux go to the projects directory.
 
 ```sh
 $ ./gradlew clean test
 $ ./gradlew run
 ```
 
-To run the application just switch to gradlew.bat.
+To run the application on Windows just switch to gradlew.bat.
 
 Goto the browser and type something like http://localhost:8080/api/airports/search?country.code=PK to access the application.
 
 I have tested following Uri,
-http://localhost:8080/api/airports/search?country.code=AU filters data for country code AU.
-http://localhost:8080/api/airports/search?code=BZE filters data for airport code.
-http://localhost:8080/api/airports/search?international_airport=true gets the list of airports with international_airport is true.
-http://localhost:8080/api/airports/search?international_airport=false gets the list of airports with international_airport is false.
-http://localhost:8080/api/airports/search?iregional_airport=true gets the list of airports with regional_airport is true.
-http://localhost:8080/api/airports/search?regional_airport=false gets the list of airports with regional_airport is false.
+  - http://localhost:8080/api/airports/search?country.code=AU filters data for country code AU.
+  - http://localhost:8080/api/airports/search?code=BZE filters data for airport code.
+  - http://localhost:8080/api/airports/search?international_airport=true gets the list of airports with international_airport is true.
+  - http://localhost:8080/api/airports/search?international_airport=false gets the list of airports with international_airport is false.
+  - http://localhost:8080/api/airports/search?iregional_airport=true gets the list of airports with regional_airport is true.
+  - http://localhost:8080/api/airports/search?regional_airport=false gets the list of airports with regional_airport is false.
 
 The application should filter data based on any attribute in the Json data.
+
 

@@ -54,6 +54,13 @@ public class AirportsListingControllerTest {
                     andExpect(content().contentTypeCompatibleWith(APPLICATION_JSON)).
                         andExpect(jsonPath("airports.[0].code", is(airport1.getCode()))).
                             andExpect(jsonPath("airports.[0].currency_code", is(airport1.getCurrencyCode())));
+        
+        mvc.perform(get("/api/airports/search").
+            contentType(APPLICATION_JSON)).
+                andExpect(status().isOk()).
+                    andExpect(content().contentTypeCompatibleWith(APPLICATION_JSON)).
+                        andExpect(jsonPath("airports.[0].code", is(airport1.getCode()))).
+                            andExpect(jsonPath("airports.[0].currency_code", is(airport1.getCurrencyCode())));
     }
 
     private Airport newAirport(String code, String currency) {

@@ -4,11 +4,9 @@ import com.jayway.jsonpath.DocumentContext;
 import com.jayway.jsonpath.JsonPath;
 import com.jayway.jsonpath.spi.json.JacksonJsonProvider;
 import com.jayway.jsonpath.spi.mapper.JacksonMappingProvider;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.charset.Charset;
+import static java.nio.charset.Charset.forName;
 import java.nio.file.Files;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.CacheManager;
@@ -59,21 +57,22 @@ public class AirportLocationApplicationConfiguration {
         return JsonPath.parse(airportsJsonData().getInputStream(), jsonPathConfiguration());
     }
 
+    /**
+     * Loads the Json data.
+     * <br/>
+     * First tries to load the Airports Json data from Quantas API, if the API is not available, loads the copy of the data from the classpath.
+     * @return
+     * @throws IOException 
+     */
     private Resource loadDataResource() throws IOException {
         try {
             String json = restTemplate().getForObject(quantasAirportsApi, String.class);
             File jsonFile = createFileIfNotExists();
-            try (BufferedWriter w = writer(jsonFile)) {
-                Files.write(jsonFile.toPath(), json.getBytes(Charset.forName("UTF-8")));
-            }
+            Files.write(jsonFile.toPath(), json.getBytes(forName("UTF-8")));
             return new FileSystemResource(jsonFile);
         } catch(RestClientException ex) {
             return new ClassPathResource(jsonDataFile);
         }   
-    }
-
-    private static BufferedWriter writer(File jsonFile) throws IOException {
-        return new BufferedWriter(new FileWriter(jsonFile, false));
     }
 
     private File createFileIfNotExists() throws IOException {
