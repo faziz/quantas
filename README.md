@@ -51,7 +51,7 @@ I have tested following Uri,
   - http://localhost:8080/api/airports/search?code=BZE filters data for airport code.
   - http://localhost:8080/api/airports/search?international_airport=true gets the list of airports with international_airport is true.
   - http://localhost:8080/api/airports/search?international_airport=false gets the list of airports with international_airport is false.
-  - http://localhost:8080/api/airports/search?iregional_airport=true gets the list of airports with regional_airport is true.
+  - http://localhost:8080/api/airports/search?regional_airport=true gets the list of airports with regional_airport is true.
   - http://localhost:8080/api/airports/search?regional_airport=false gets the list of airports with regional_airport is false.
 
 The application should filter data based on any attribute in the Json data.
