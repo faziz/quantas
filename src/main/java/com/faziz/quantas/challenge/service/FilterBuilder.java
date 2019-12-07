@@ -28,7 +28,7 @@ public class FilterBuilder {
      * @param entry Entry describes a single filter meta-data.
      * @return 
      */
-    private static Criteria newFilter(Map.Entry<String, String[]> entry) {
+    private Criteria newFilter(Map.Entry<String, String[]> entry) {
 
         String attributeName = entry.getKey();
         String[] value = entry.getValue();
