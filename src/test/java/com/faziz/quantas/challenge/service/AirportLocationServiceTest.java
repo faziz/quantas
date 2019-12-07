@@ -3,7 +3,10 @@ package com.faziz.quantas.challenge.service;
 import com.faziz.quantas.challenge.AirportLocationApplicationConfiguration;
 import com.faziz.quantas.challenge.model.Airport;
 import com.faziz.quantas.challenge.model.Airports;
+import static com.jayway.jsonpath.Criteria.where;
 import com.jayway.jsonpath.DocumentContext;
+import com.jayway.jsonpath.Filter;
+import static java.lang.Double.valueOf;
 import static java.util.Arrays.asList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,6 +26,8 @@ public class AirportLocationServiceTest {
     
     @Mock
     private DocumentContext documentContext;
+    @Mock
+    private FilterBuilder filterBuilder;
     @InjectMocks
     private AirportLocationService airportLocationService;
     
@@ -35,6 +40,8 @@ public class AirportLocationServiceTest {
         when(documentContext.read(anyString(), any(Class.class))).thenReturn(asList());
         when(documentContext.read(anyString(), any(Class.class), any())).
             thenReturn(airports);
+        when(filterBuilder.buildfilters(anyMap())).
+            thenReturn(new Filter[]{ Filter.filter(where("test").is(valueOf("123")))});
 
         Map<String, String[]> parameters = new HashMap();
         parameters.put("code", new String[] {"CHB"});
