@@ -40,7 +40,7 @@ public class AirportLocationServiceTest {
         when(documentContext.read(anyString(), any(Class.class))).thenReturn(asList());
         when(documentContext.read(anyString(), any(Class.class), any())).
             thenReturn(airports);
-        when(filterBuilder.buildfilters(anyMap())).
+        when(filterBuilder.build(anyMap())).
             thenReturn(new Filter[]{ Filter.filter(where("test").is(valueOf("123")))});
 
         Map<String, String[]> parameters = new HashMap();

@@ -28,7 +28,7 @@ public class AirportLocationService {
     @Cacheable(key = "#uniqueKey")
     public Airports getAirports(final Map<String, String[]> parameters, Integer uniqueKey) {
 
-        Filter[] filters = filterBuilder.buildfilters(parameters);
+        Filter[] filters = filterBuilder.build(parameters);
         List airports = filters.length == 0 ? 
             context.read("$.airports[*]", List.class):
                 context.read("$.airports[?]", List.class, filters);

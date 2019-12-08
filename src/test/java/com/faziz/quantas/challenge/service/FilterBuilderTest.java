@@ -9,17 +9,17 @@ import static org.junit.jupiter.api.Assertions.*;
 public class FilterBuilderTest {
 
     /**
-     * Test of buildfilters method, of class FilterBuilder.
+     * Test of build method, of class FilterBuilder.
      */
     @Test
     public void testBuildfilters() {
         FilterBuilder builder = new FilterBuilder();
-        Filter[] filters = builder.buildfilters(new HashMap<>());
+        Filter[] filters = builder.build(new HashMap<>());
         assertTrue(filters.length == 0);
 
         Map<String, String[]> parameters = new HashMap<>();
         parameters.put("test", new String[]{"123"});
-        filters = builder.buildfilters(parameters);
+        filters = builder.build(parameters);
         assertTrue(filters.length == 1);
     }
     

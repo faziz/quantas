@@ -17,7 +17,7 @@ public class FilterBuilder {
      * @param parameters parameter key maps to attribute name in the json data.
      * @return prepares an array of filters based on provided parameters.
      */
-    public Filter[] buildfilters(final Map<String, String[]> parameters) {
+    public Filter[] build(final Map<String, String[]> parameters) {
         return parameters.
             entrySet().stream().
                 map(e -> filter(newFilter(e))).
